@@ -23,10 +23,12 @@ const c = new Crawler({
           console.log('ERROR')
           console.log(error)
       }else{
+          console.log(res.request.uri)
           let $ = res.$;
           let img_url = $('picture.img-fluid').children().attr('src')
           console.log(img_url)
-          //request(img_url).pipe(fs.createWriteStream(__dirname + `/images/${img_url}.jpg`))
+          let img_name  = img_url.split('/')
+          request(img_url).pipe(fs.createWriteStream(`../images/${img_name[img_name.length-1]}.jpg`))
       }
       done()
   }
